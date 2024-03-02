@@ -1,14 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Navbar from "./components/Fragments/Navbar";
+import ProductList from "./features/ProductList";
 
 function App() {
   return (
     <>
       <Navbar logoName="DaraStore" />
-      <main className="max-w-7xl mx-auto"></main>
+      <main className="max-w-7xl mx-auto px-4">
+        <ProductList />
+      </main>
     </>
   );
 }
