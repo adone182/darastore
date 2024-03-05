@@ -18,9 +18,12 @@ const Navbar = ({ logoName, handleModalCart }) => {
             classname="relative bg-blue-800 rounded-full p-2"
             onClick={handleModalCart}
           >
-            <span className="absolute -top-1 -right-2 w-6 h-6 rounded-full bg-red-600 text-white text-sm flex items-center justify-center">
-              {cartTotalItems}
-            </span>
+            {cartTotalItems !== 0 && (
+              <span className="absolute -top-1 -right-2 w-6 h-6 rounded-full bg-red-600 text-white text-sm flex items-center justify-center">
+                {cartTotalItems}
+              </span>
+            )}
+
             <GiShoppingCart size={32} color="white" />
           </Button>
         </div>
