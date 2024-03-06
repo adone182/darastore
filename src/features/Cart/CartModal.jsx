@@ -2,6 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Fragments/Modal";
 import Button from "../../components/Elements/Button";
 import { IoTrash } from "react-icons/io5";
+import { confirmAlert } from "react-confirm-alert";
+import { toast } from "react-toastify";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import "react-toastify/dist/ReactToastify.css";
 import {
   addQuantityProduct,
   minQuantityProduct,
@@ -35,11 +39,48 @@ const CartModal = ({ handleModalCart }) => {
   };
 
   const handleReduceItemQuantity = (productId) => {
-    dispatch(minQuantityProduct(productId));
+    const item = cartItems.find((item) => item.id === productId);
+
+    if (item.quantity === 1) {
+      confirmAlert({
+        message:
+          "Kamu yakin ingin mengurangi produk ini dari keranjang belanja?",
+        buttons: [
+          {
+            label: "Ya",
+            onClick: () => {
+              dispatch(removeItemFromCart(productId));
+              toast.success("Produk berhasil dihapus dari keranjang belanja.");
+            },
+          },
+          {
+            label: "Tidak",
+            onClick: () => {},
+          },
+        ],
+      });
+    } else {
+      dispatch(minQuantityProduct(productId));
+    }
   };
 
   const handleRemoveItemInCart = (productId) => {
-    dispatch(removeItemFromCart(productId));
+    confirmAlert({
+      message: "Kamu yakin ingin menghapus produk ini dari keranjang belanja?",
+      buttons: [
+        {
+          label: "Ya",
+          onClick: () => {
+            dispatch(removeItemFromCart(productId));
+            toast.success("Produk berhasil dihapus dari keranjang belanja.");
+          },
+        },
+        {
+          label: "Tidak",
+          onClick: () => {},
+        },
+      ],
+    });
   };
 
   return (

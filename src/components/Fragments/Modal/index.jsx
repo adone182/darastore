@@ -1,4 +1,6 @@
 import ReactDOM from "react-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BackdropOverlay = () => {
   return (
@@ -11,6 +13,7 @@ const ModalOverlay = ({ children }) => {
     <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-30">
       <div className="bg-white p-4 rounded-lg shadow-lg text-gray-900 mx-2">
         {children}
+        <ToastContainer />
       </div>
     </div>
   );

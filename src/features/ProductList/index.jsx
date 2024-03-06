@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Elements/Button";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../Cart/cartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -27,6 +29,7 @@ const ProductList = () => {
 
   const handleClickBuyNow = (product) => {
     dispatch(addItemToCart(product));
+    toast.success("Horee, Produk berhasil di tambahkan ke keranjang");
   };
 
   return (

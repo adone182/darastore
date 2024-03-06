@@ -57,8 +57,6 @@ export const cartSlice = createSlice({
           itemToDecrement.quantity -= 1;
           itemToDecrement.totalPrice =
             itemToDecrement.quantity * itemToDecrement.price;
-        } else {
-          state.cartItems.splice(itemToDecrementIndex, 1);
         }
       }
     },
@@ -80,4 +78,4 @@ export const selectCartTotalItems = (state) =>
   state.cart.cartItems.reduce((total, item) => total + item.quantity, 0);
 
 export const selectCartTotalPrices = (state) =>
-  state.cart.cartItems.reduce((total, item) => total + item.price, 0);
+  state.cart.cartItems.reduce((total, item) => total + item.totalPrice, 0);
