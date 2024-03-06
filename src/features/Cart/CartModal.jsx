@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Fragments/Modal";
 import Button from "../../components/Elements/Button";
+import { IoTrash } from "react-icons/io5";
 import {
   addQuantityProduct,
   minQuantityProduct,
+  removeItemFromCart,
   selectCartItems,
   selectCartTotalItems,
   selectCartTotalPrices,
@@ -29,13 +31,15 @@ const CartModal = ({ handleModalCart }) => {
   };
 
   const handleAddItemQuantity = (productId) => {
-    console.log({ prod: productId });
     dispatch(addQuantityProduct(productId));
   };
 
   const handleReduceItemQuantity = (productId) => {
-    console.log({ prod: productId });
     dispatch(minQuantityProduct(productId));
+  };
+
+  const handleRemoveItemInCart = (productId) => {
+    dispatch(removeItemFromCart(productId));
   };
 
   return (
@@ -82,12 +86,18 @@ const CartModal = ({ handleModalCart }) => {
                         </Button>
                       </div>
                     </div>
+                    <Button
+                      type="button"
+                      onClick={() => handleRemoveItemInCart(product.id)}
+                    >
+                      <IoTrash size={25} color="red" />
+                    </Button>
                   </div>
                 </div>
               );
             })}
           </div>
-          <div className="">
+          <div>
             <h3 className="text-lg font-bold">Total Item: {totalItems}</h3>
             <h3 className="text-lg font-bold">Total Price : {totalPrices} </h3>
           </div>

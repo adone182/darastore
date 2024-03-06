@@ -15,7 +15,7 @@ function App() {
     <>
       {isOpenModalCart ? <CartModal handleModalCart={handleModalCart} /> : null}
       <Navbar logoName="DaraStore" handleModalCart={handleModalCart} />
-      <main className="max-w-7xl mx-auto px-4">
+      <main className="max-w-7xl mx-auto px-4 lg:px-10">
         <ProductList />
       </main>
     </>

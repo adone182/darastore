@@ -8,7 +8,7 @@ const Navbar = ({ logoName, handleModalCart }) => {
 
   return (
     <header className="bg-blue-700">
-      <nav className="max-w-7xl mx-auto px-4 py-2">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-10 py-2">
         <div className="flex items-center justify-between h-16">
           <h1 className="text-3xl text-gray-100 italic font-bold">
             {logoName}
@@ -19,12 +19,12 @@ const Navbar = ({ logoName, handleModalCart }) => {
             onClick={handleModalCart}
           >
             {cartTotalItems !== 0 && (
-              <span className="absolute -top-1 -right-2 w-6 h-6 rounded-full bg-red-600 text-white text-sm flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-600 text-white text-sm flex items-center justify-center">
                 {cartTotalItems}
               </span>
             )}
 
-            <GiShoppingCart size={32} color="white" />
+            <GiShoppingCart size={25} color="white" />
           </Button>
         </div>
       </nav>

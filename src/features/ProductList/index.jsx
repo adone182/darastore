@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import Button from "../../components/Elements/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, selectCartItems } from "../Cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../Cart/cartSlice";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const cartItem = useSelector(selectCartItems);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,30 +33,14 @@ const ProductList = () => {
     <>
       {loading ? (
         <div>
-          <div className="bg-gray-300 h-4 w-1/4 rounded-xl mt-5"></div>
+          <div className="bg-gray-200 h-4 w-1/4 rounded-xl mt-5"></div>
           <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
-            <div className="bg-white shadow-xl rounded-lg p-4 w-full">
-              <div className="w-[80%] h-[350px] mx-auto rounded-xl bg-gray-200"></div>
+            <div className="bg-white shadow-xl rounded-md p-4 w-full">
+              <div className="w-[100%] h-[350px] mx-auto rounded-xl bg-gray-200"></div>
               <div className="flex flex-col gap-6 mt-8">
-                <div className="bg-gray-300 h-4 w-1/2 rounded-xl mt-5 py-3 px-8"></div>
-                <h3 className="bg-gray-300 h-4 w-1/2 rounded-xl"></h3>
-                <h4 className="bg-gray-300 h-4 w-1/2 rounded-xl mt-2"></h4>
-              </div>
-            </div>
-            <div className="bg-white shadow-xl rounded-lg p-4 w-full">
-              <div className="w-[80%] h-[350px] mx-auto rounded-xl bg-gray-200"></div>
-              <div className="flex flex-col gap-6 mt-8">
-                <div className="bg-gray-300 h-4 w-1/2 rounded-xl mt-5 py-3 px-8"></div>
-                <h3 className="bg-gray-300 h-4 w-1/2 rounded-xl"></h3>
-                <h4 className="bg-gray-300 h-4 w-1/2 rounded-xl mt-2"></h4>
-              </div>
-            </div>
-            <div className="bg-white shadow-xl rounded-lg p-4 w-full">
-              <div className="w-[80%] h-[350px] mx-auto rounded-xl bg-gray-200"></div>
-              <div className="flex flex-col gap-6 mt-8">
-                <div className="bg-gray-300 h-4 w-1/2 rounded-xl mt-5 py-3 px-8"></div>
-                <h3 className="bg-gray-300 h-4 w-1/2 rounded-xl"></h3>
-                <h4 className="bg-gray-300 h-4 w-1/2 rounded-xl mt-2"></h4>
+                <div className="bg-gray-200 h-4 w-full rounded-xl mt-5 py-3 px-8"></div>
+                <h3 className="bg-gray-200 h-4 w-full rounded-xl"></h3>
+                <h4 className="bg-gray-200 h-4 w-1/2 rounded-xl mt-2"></h4>
               </div>
             </div>
           </div>
