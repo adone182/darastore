@@ -32,24 +32,13 @@ export const cartSlice = createSlice({
         (item) => item.id !== itemIdToRemove
       );
     },
-    editItemInCart: (state, action) => {
-      const { id, quantity } = action.payload;
-      const itemToEditIndex = state.cartItems.findIndex(
-        (item) => item.id === id
-      );
-
-      if (itemToEditIndex !== -1) {
-        state.cartItems[itemToEditIndex].quantity = quantity;
-        state.cartItems[itemToEditIndex].totalPrice =
-          quantity * state.cartItems[itemToEditIndex].price;
-      }
-    },
     addQuantityProduct: (state, action) => {
       const productId = action.payload;
-      const itemToIncrement = state.cartItems.find(
+      const itemToIncrementIndex = state.cartItems.findIndex(
         (item) => item.id === productId
       );
-      if (itemToIncrement) {
+      if (itemToIncrementIndex !== -1) {
+        const itemToIncrement = state.cartItems[itemToIncrementIndex];
         itemToIncrement.quantity += 1;
         itemToIncrement.totalPrice =
           itemToIncrement.quantity * itemToIncrement.price;
@@ -57,13 +46,20 @@ export const cartSlice = createSlice({
     },
     minQuantityProduct: (state, action) => {
       const productId = action.payload;
-      const itemToDecrement = state.cartItems.find(
+      const itemToDecrementIndex = state.cartItems.findIndex(
         (item) => item.id === productId
       );
-      if (itemToDecrement && itemToDecrement.quantity > 1) {
-        itemToDecrement.quantity -= 1;
-        itemToDecrement.totalPrice =
-          itemToDecrement.quantity * itemToDecrement.price;
+
+      if (itemToDecrementIndex !== -1) {
+        const itemToDecrement = state.cartItems[itemToDecrementIndex];
+
+        if (itemToDecrement.quantity > 1) {
+          itemToDecrement.quantity -= 1;
+          itemToDecrement.totalPrice =
+            itemToDecrement.quantity * itemToDecrement.price;
+        } else {
+          state.cartItems.splice(itemToDecrementIndex, 1);
+        }
       }
     },
   },
