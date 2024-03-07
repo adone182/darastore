@@ -5,7 +5,7 @@ import { addItemToCart } from "../Cart/cartSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ProductList = () => {
+const ProductList = ({ searchQuery }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch(`https://fakestoreapi.com/products`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
