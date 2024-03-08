@@ -11,7 +11,7 @@ const BackdropOverlay = () => {
 const ModalOverlay = ({ children }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-30">
-      <div className="bg-white p-4 rounded-lg shadow-lg text-gray-900 mx-2">
+      <div className="bg-white px-4 rounded-lg shadow-lg text-gray-900 mx-2 my-2">
         {children}
         <ToastContainer />
       </div>

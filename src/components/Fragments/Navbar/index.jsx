@@ -8,7 +8,7 @@ const Navbar = ({ logoName, handleModalCart }) => {
 
   return (
     <header className="bg-blue-700">
-      <nav className="max-w-5xl lg:max-w-7xl mx-auto px-4 py-2">
+      <nav className="max-w-6xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-16">
           <h1 className="text-3xl text-gray-100 italic font-bold">
             {logoName}

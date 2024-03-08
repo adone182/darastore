@@ -28,8 +28,7 @@ const CartModal = ({ handleModalCart }) => {
     const message = encodeURIComponent(
       `Hallo, saya ingin membeli ${totalItems} barang dengan total harga ${totalPrices}`
     );
-
-    const URL = `https://api.whatsapp.com/send/?phone=${phoneNumber}?text=${message}`;
+    const URL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
 
     window.open(URL, "_blank");
   };
@@ -87,10 +86,16 @@ const CartModal = ({ handleModalCart }) => {
     <>
       <Modal>
         <div className="flex flex-col gap-6 p-1 sm:p-2 w-full lg:w-[900px]">
-          <div className="flex flex-col gap-6 max-h-[500px] overflow-auto">
+          <div className="flex flex-col py-2 lg:py-14 gap-6 max-h-[500px] overflow-auto">
+            <h3 className="text-blue-700 text-md text-center font-semibold italic underline">
+              Your Shopping Cart
+            </h3>
             {cartItems.map((product) => {
               return (
-                <div className="w-full border-blue-200 pb-4" key={product.id}>
+                <div
+                  className="w-full border-b-2 border-blue-200 pb-6"
+                  key={product.id}
+                >
                   <div className="flex items-center w-full">
                     <div className="w-[120px] h-auto overflow-hidden">
                       <img
@@ -100,7 +105,7 @@ const CartModal = ({ handleModalCart }) => {
                       />
                     </div>
                     <div className="ml-10 w-[75%]">
-                      <h3 className="capitalize mt-3 text-lg">
+                      <h3 className="capitalize mt-3 text-md">
                         {product.title}
                       </h3>
                       <div className="flex items-center gap-2">

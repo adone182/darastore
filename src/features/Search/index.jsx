@@ -19,7 +19,7 @@ const Search = ({ onSearch }) => {
         name="search"
         value={query}
         onChange={handleChange}
-        classname="border border-gray-200 bg-white h-12 px-4 my-10 rounded-full text-sm focus:outline-none w-full"
+        classname="border border-gray-200 bg-white h-12 px-4 lg:px-12 my-10 rounded-full text-sm focus:outline-none w-full"
         placeholder="Masukan keyword produk yang ingin dicari"
       />
 
