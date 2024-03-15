@@ -23,8 +23,12 @@ const Search = ({ onSearch }) => {
         placeholder="Masukan keyword produk yang ingin dicari"
       />
 
-      <Button type="button" classname="absolute top-15 end-5">
-        <FaSearch size={22} color="blue" />
+      <Button
+        type="button"
+        classname="absolute top-15 end-5"
+        ariaLabel="search"
+      >
+        <FaSearch size={22} color="blue" aria-label="seacrh-icon" />
       </Button>
     </div>
   );

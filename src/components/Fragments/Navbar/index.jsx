@@ -7,15 +7,16 @@ const Navbar = ({ logoName, handleModalCart }) => {
   const cartTotalItems = useSelector(selectCartTotalItems);
 
   return (
-    <header className="bg-blue-700">
-      <nav className="max-w-6xl mx-auto px-4 py-2">
+    <header className="bg-white fixed w-full z-30 shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-16">
-          <h1 className="text-3xl text-gray-100 italic font-bold">
+          <h1 className="text-3xl text-blue-600 italic font-bold">
             {logoName}
           </h1>
           <Button
             type="button"
-            classname="relative bg-blue-800 rounded-full p-2"
+            classname="relative bg-blue-600 rounded-full p-2"
+            ariaLabel="button-cart"
             onClick={handleModalCart}
           >
             {cartTotalItems !== 0 && (
@@ -24,10 +25,14 @@ const Navbar = ({ logoName, handleModalCart }) => {
               </span>
             )}
 
-            <GiShoppingCart size={25} color="white" />
+            <GiShoppingCart
+              size={25}
+              color="white"
+              aria-label="shopping-cart-icon"
+            />
           </Button>
         </div>
-      </nav>
+      </div>
     </header>
   );
 };

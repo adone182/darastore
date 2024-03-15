@@ -42,8 +42,7 @@ const CartModal = ({ handleModalCart }) => {
 
     if (item.quantity === 1) {
       confirmAlert({
-        message:
-          "Kamu yakin ingin mengurangi produk ini dari keranjang belanja?",
+        message: "Are you sure, want to reduce your product?",
         buttons: [
           {
             label: "Ya",
@@ -65,7 +64,7 @@ const CartModal = ({ handleModalCart }) => {
 
   const handleRemoveItemInCart = (productId) => {
     confirmAlert({
-      message: "Kamu yakin ingin menghapus produk ini dari keranjang belanja?",
+      message: "Are you sure, want to remove product in cart?",
       buttons: [
         {
           label: "Ya",

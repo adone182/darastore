@@ -1,6 +1,19 @@
-const Button = ({ type, classname = "", children, onClick = () => {} }) => {
+const Button = ({
+  type,
+  title = "",
+  classname = "",
+  children,
+  arialLabel,
+  onClick = () => {},
+}) => {
   return (
-    <button type={type} className={classname} onClick={onClick}>
+    <button
+      type={type}
+      title={title}
+      className={classname}
+      onClick={onClick}
+      arial-label={arialLabel}
+    >
       {children}
     </button>
   );
