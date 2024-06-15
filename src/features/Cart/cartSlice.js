@@ -8,21 +8,80 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // addItemToCart: (state, action) => {
+    //   const newItem = action.payload;
+    //   const existingItemIndex = state.cartItems.findIndex(
+    //     (product) => product.id === newItem.id
+    //   );
+
+    //   const countItem = newItem.quantity ? newItem.quanitty : 1;
+    //   const countPrice = newItem.totalPrice
+    //     ? newItem.totalPrice
+    //     : newItem.price;
+
+    //   console.log("Processed countItem:", countItem, "countPrice:", countPrice);
+    //   if (existingItemIndex !== -1) {
+    //     const updatedQuantity =
+    //       state.cartItems[existingItemIndex].quantity + countItem;
+    //     console.log("Updated quantity for existing item:", updatedQuantity);
+
+    //     state.cartItems[existingItemIndex].quantity = updatedQuantity;
+    //     state.cartItems[existingItemIndex].totalPrice =
+    //       state.cartItems[existingItemIndex].quantity * newItem.price;
+    //   } else {
+    //     const newQuantity = countItem;
+    //     const newTotalPrice = countPrice;
+    //     console.log(
+    //       "Adding new item with quantity:",
+    //       newQuantity,
+    //       "and totalPrice:",
+    //       newTotalPrice
+    //     );
+
+    //     state.cartItems.push({
+    //       ...newItem,
+    //       quantity: newQuantity,
+    //       totalPrice: newTotalPrice,
+    //     });
+    //   }
+    // },
     addItemToCart: (state, action) => {
       const newItem = action.payload;
+      console.log("New item to add:", newItem);
+
       const existingItemIndex = state.cartItems.findIndex(
         (product) => product.id === newItem.id
       );
 
+      const countItem = newItem.quantity ? newItem.quantity : 1;
+      const countPrice = newItem.totalPrice
+        ? newItem.totalPrice
+        : newItem.price;
+
+      console.log("Processed countItem:", countItem, "countPrice:", countPrice);
+
       if (existingItemIndex !== -1) {
-        state.cartItems[existingItemIndex].quantity += 1;
+        const updatedQuantity =
+          state.cartItems[existingItemIndex].quantity + countItem;
+        console.log("Updated quantity for existing item:", updatedQuantity);
+
+        state.cartItems[existingItemIndex].quantity = updatedQuantity;
         state.cartItems[existingItemIndex].totalPrice =
           state.cartItems[existingItemIndex].quantity * newItem.price;
       } else {
+        const newQuantity = countItem;
+        const newTotalPrice = countPrice;
+        console.log(
+          "Adding new item with quantity:",
+          newQuantity,
+          "and totalPrice:",
+          newTotalPrice
+        );
+
         state.cartItems.push({
           ...newItem,
-          quantity: 1,
-          totalPrice: newItem.price,
+          quantity: newQuantity,
+          totalPrice: newTotalPrice,
         });
       }
     },
@@ -31,6 +90,9 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== itemIdToRemove
       );
+    },
+    removeAllItemFromCart: (state, action) => {
+      state.cartItems = [];
     },
     addQuantityProduct: (state, action) => {
       const productId = action.payload;
@@ -69,6 +131,7 @@ export const {
   editItemInCart,
   addQuantityProduct,
   minQuantityProduct,
+  removeAllItemFromCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
