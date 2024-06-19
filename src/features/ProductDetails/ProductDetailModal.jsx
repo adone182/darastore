@@ -1,23 +1,23 @@
 import Modal from "../../components/Fragments/Modal";
 import Button from "../../components/Elements/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../Cart/cartSlice";
 import { toast } from "react-toastify";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "react-toastify/dist/ReactToastify.css";
-import { FaStar, FaChevronLeft } from "react-icons/fa";
+import { FaStar, FaChevronLeft, FaRegHeart } from "react-icons/fa";
 import { useState, useEffect } from "react";
-
-// import {
-//   addItemToWishList,
-//   removeItemFromWishList,
-//   selectWishListItems,
-// } from "../WishList/wishListSlice";
+import convertUsdToIdr from "../../utils/convertUsdToIdr";
+import {
+  addItemToWishList,
+  removeItemFromWishList,
+  selectWishListItems,
+} from "../WishList/wishListSlice";
 
 const ProductDetailModal = ({ handleModalProductDetail, product }) => {
   const dispatch = useDispatch();
-  // const wishListItems = useSelector(selectWishListItems);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const wishListItems = useSelector(selectWishListItems);
+  const [selectedProduct, setSelectedProduct] = useState(product);
 
   const handleAddItemQuantity = (product) => {
     setSelectedProduct({
@@ -36,25 +36,24 @@ const ProductDetailModal = ({ handleModalProductDetail, product }) => {
   };
 
   const handleAddToCart = (product) => {
-    console.log({ product });
     dispatch(addItemToCart(product));
     handleModalProductDetail();
     toast.success("Yeay 🤩, Product success add to cart!");
   };
 
-  // const isInWishList = (selectedProduct) =>
-  //   wishListItems.some((item) => item.id === selectedProduct.id);
+  const handleWishList = (product) => {
+    const isInWishList = wishListItems.some((item) => item.id == product.id);
+    if (!isInWishList) {
+      dispatch(addItemToWishList(product));
+      toast.success("Yeay 🤩, Product success add to wishlist!");
+    } else {
+      dispatch(removeItemFromWishList(product.id));
+      toast.success("Product remove in wishlist!");
+    }
+  };
 
-  // const handleWishList = (product) => {
-  //   const isInWishList = wishListItems.some((item) => item.id == product.id);
-  //   if (!isInWishList) {
-  //     dispatch(addItemToWishList(product));
-  //     toast.success("Yeay 🤩, Product success add to wishlist!");
-  //   } else {
-  //     dispatch(removeItemFromWishList(product.id));
-  //     toast.success("Product remove in wishlist!");
-  //   }
-  // };
+  const isInWishList = (product) =>
+    wishListItems?.find((item) => item.id === product.id);
 
   useEffect(() => {
     setSelectedProduct(product);
@@ -89,17 +88,21 @@ const ProductDetailModal = ({ handleModalProductDetail, product }) => {
                   alt={selectedProduct?.title}
                   className="w-full h-full object-contain object-center"
                 />
-                {/* <div className="absolute top-3 mobile:top-4 right-3 mobile:right-4">
-                  <FaRegHeart
-                    size={22}
+                <div className="absolute top-3 mobile:top-4 right-3 mobile:right-4">
+                  <Button
+                    type="button"
                     onClick={() => handleWishList(selectedProduct)}
-                    className={`cursor-pointer ${
-                      !isInWishList
-                        ? "text-gray bg-white hover:text-pink-500 duration-300"
-                        : "text-pink-600 hover:text-pink-500 duration-300"
-                    }`}
-                  />
-                </div> */}
+                  >
+                    <FaRegHeart
+                      size={22}
+                      className={`cursor-pointer ${
+                        !isInWishList(selectedProduct)
+                          ? "text-gray bg-white hover:text-pink-500 duration-300"
+                          : "text-pink-600 hover:text-pink-500 duration-300"
+                      }`}
+                    />
+                  </Button>
+                </div>
               </figure>
               <div className="flex justify-between mb-4">
                 <div className="">
@@ -166,8 +169,8 @@ const ProductDetailModal = ({ handleModalProductDetail, product }) => {
                 onClick={() => handleAddToCart(selectedProduct)}
               >
                 Add to Cart{" "}
-                <span className="text-white font-normal mx-1.5">|</span> ${" "}
-                {selectedProduct?.totalPrice}
+                <span className="text-white font-normal mx-1.5">|</span>
+                {convertUsdToIdr(selectedProduct?.totalPrice)}
               </Button>
             </div>
           </div>

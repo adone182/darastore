@@ -5,7 +5,7 @@ import cartSlice from "../features/Cart/cartSlice";
 
 import wishListSlice from "../features/WishList/wishListSlice";
 import productSlice from "../features/ProductList/productSlice";
-import { filterSlice } from "../features/FilterProduct/filterSlice";
+import filterSlice from "../features/FilterProduct/filterSlice";
 
 const persistCartConfig = {
   key: "cart", //kunci masuk
@@ -33,7 +33,7 @@ const store = configureStore({
   reducer: {
     cart: persistedCart,
     product: productSlice,
-    filterProduct: filterSlice,
+    filter: filterSlice,
     wishList: persistedWishList,
   },
   devTools: true,

@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { FaChevronLeft } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { addItemToCart } from "../Cart/cartSlice";
+import convertUsdToIdr from "../../utils/convertUsdToIdr";
 
 const WishListModal = ({ handleModalWishList, handleModalCart }) => {
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
     <>
       <Modal onClick={handleModalWishList}>
         <div className="w-full relative">
-          <div className="px-5 py-16 overflow-y-auto max-h-[58vh] md:max-h-[68vh] ">
+          <div className="px-5 py-16 overflow-y-auto max-h-[58vh] md:max-h-[68vh]">
             <div className="h-full">
               <div className="absolute w-full top-[10px] left-0 z-[101]">
                 <h1 className="text-center text-pink-600 italic font-bold">
@@ -88,7 +89,7 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
                 </Button>
               </div>
 
-              <div className="absolute top-[10px] right-9 z-[101]">
+              <div className="absolute top-[10px] right-5 z-[101]">
                 <Button
                   type="button"
                   aria-label="Remove All Product in wishlist"
@@ -111,13 +112,13 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
                   <p className="mt-3 text-center text-sm font-semibold">
                     Your wishlist is empty
                   </p>
-                  <p className="text-center text-sm text-gray-400 mb-2">
+                  <p className="text-center text-sm text-gray-400 mb-5">
                     Tap the heart on any item to start saving your favorites ✨.
                   </p>
                   <Button
                     type="button"
                     aria-label="Continue Shopping"
-                    classname="mt-3 block bg-pink-600 hover:bg-lime-500 text-white font-bold px-4 py-1.5 rounded-lg text-center leading-normal text-sm  transition duration-100 ease-in-out"
+                    classname="block bg-pink-600 hover:bg-lime-500 text-white font-bold px-4 py-1.5 rounded-lg text-center leading-normal text-sm  transition duration-100 ease-in-out"
                     onClick={handleModalWishList}
                   >
                     Continue Shopping
@@ -128,7 +129,7 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
                   {wishListItems?.map((product) => {
                     return (
                       <div
-                        className="border-b-2 border-dashed border-pink-200 py-4 flex items-center space-x-3"
+                        className="border-b-2 border-dashed border-pink-200 py-4 flex items-center space-x-5"
                         key={product?.id}
                       >
                         <div className="border border-pink-200 rounded-lg">
@@ -140,7 +141,7 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
                             />
                           </figure>
                         </div>
-                        <div className="w-full">
+                        <div className="w-[300px]">
                           <h2 className="relative font-bold text-sm text-gray-800 pr-8 line-clamp-2 hover:line-clamp-none mb-px">
                             {product?.title}
                             <Button
@@ -159,7 +160,7 @@ const WishListModal = ({ handleModalWishList, handleModalCart }) => {
                           </p>
                           <div className="flex items-center justify-between">
                             <h3 className="font-semibold">
-                              ${product?.price} USD
+                              {convertUsdToIdr(product?.price)}
                             </h3>
                             <Button
                               type="button"

@@ -6,12 +6,11 @@ import ProductList from "./features/ProductList";
 import CartModal from "./features/Cart/CartModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Search from "./features/Search";
 import Carousel from "./components/Fragments/Carousel";
-// import ProductDetailModal from "./features/ProductDetails/ProductDetailModal";
 import WishListModal from "./features/WishList/WishListModal";
 import Navbar from "./components/Layouts/Navbar";
 import Footer from "./components/Layouts/Footer";
+import FilterModal from "./features/FilterProduct/FilterModal";
 
 const banners = [
   { imageUrl: banner1, altText: "Banner Promo One" },
@@ -21,8 +20,7 @@ const banners = [
 function App() {
   const [isOpenModalCart, setIsOpenModalCart] = useState(false);
   const [isOpenModalWishList, setIsOpenModalWishList] = useState(false);
-  // const [isopenModalProduct, setIsOpenModalProduct] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [isOpenModalFilter, setIsOpenModalFilter] = useState(false);
 
   const handleModalCart = () => {
     return setIsOpenModalCart((prevState) => !prevState);
@@ -32,17 +30,16 @@ function App() {
     return setIsOpenModalWishList((prevState) => !prevState);
   };
 
-  // const handleModalProductDetail = () => {
-  //   return setIsOpenModalProduct((prevState) => !prevState);
-  // };
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
+  const handleModalFilterSearch = () => {
+    return setIsOpenModalFilter((prevState) => !prevState);
   };
 
   return (
     <>
       {isOpenModalCart ? <CartModal handleModalCart={handleModalCart} /> : null}
+      {isOpenModalFilter ? (
+        <FilterModal handleModalFilterSearch={handleModalFilterSearch} />
+      ) : null}
       {isOpenModalWishList ? (
         <WishListModal
           handleModalWishList={handleModalWishList}
@@ -58,14 +55,7 @@ function App() {
         <Carousel banners={banners} />
       </div> */}
       <main className="max-w-7xl mx-auto px-4 py-4 mt-20">
-        <h1 className="text-center text-2xl text-pink-600 font-bold italic my-10">
-          Shopping Product
-        </h1>
-        <Search onSearch={handleSearch} />
-        <ProductList
-          searchQuery={searchQuery}
-          handleModalWishList={handleModalWishList}
-        />
+        <ProductList handleModalFilterSearch={handleModalFilterSearch} />
         <ToastContainer />
       </main>
 

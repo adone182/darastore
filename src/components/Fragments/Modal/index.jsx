@@ -2,11 +2,12 @@ import ReactDOM from "react-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const BackdropOverlay = () => {
+const BackdropOverlay = ({ onClick }) => {
   return (
     <div
       role="presentation"
       className="fixed top-0 left-0 w-full h-screen z-20 bg-black bg-opacity-80"
+      onClick={onClick}
     />
   );
 };
@@ -24,10 +25,13 @@ const ModalOverlay = ({ children }) => {
 
 const portalElement = document.getElementById("modal");
 
-const Modal = ({ children }) => {
+const Modal = ({ onClick, children }) => {
   return (
     <>
-      {ReactDOM.createPortal(<BackdropOverlay />, portalElement)}
+      {ReactDOM.createPortal(
+        <BackdropOverlay onClick={onClick} />,
+        portalElement
+      )}
       {ReactDOM.createPortal(
         <ModalOverlay>{children}</ModalOverlay>,
         portalElement
